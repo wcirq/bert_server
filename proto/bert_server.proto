@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service BertServet{
+    rpc get_vectors(Texts) returns (Vectors) {}
+    rpc get_vector(Text) returns (Vector) {}
+}
+
+message Texts{
+    repeated string sentences = 1;
+}
+
+message Text{
+    string sentence = 1;
+}
+
+message Vectors{
+    repeated Vector vectors  = 1;
+}
+
+message Vector{
+    repeated double vector  = 1;
+}
