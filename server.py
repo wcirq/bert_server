@@ -10,18 +10,18 @@ from concurrent import futures
 import numpy as np
 import time
 import grpc
-
+from common.config import logger
 from bert.bert2vec import BertEncode
 from grpc_base import bert_server_pb2, bert_server_pb2_grpc
 
 
-# 实现 proto 文件中定义的 GreeterServicer
+# 实现 proto 文件中定义的 BertServetServicer
 class Greeter(bert_server_pb2_grpc.BertServetServicer):
 
     def __init__(self):
         super().__init__()
         self.text2vec = BertEncode(graph_path=None)
-        print("\033[1;32m init ok \033[0m")
+        logger.info("\033[1;32mbert initialize ok\033[0m")
 
     def get_vectors(self, request, context):
         vectors = self.text2vec.encode(request.sentences)

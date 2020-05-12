@@ -9,7 +9,7 @@ file_path = os.path.dirname(__file__)
 model_dir = os.path.join(file_path, 'bert_pre_model/')
 config_name = os.path.join(model_dir, 'bert_config.json')
 ckpt_name = os.path.join(model_dir, 'bert_model.ckpt')
-output_dir = os.path.join(model_dir, '../bert_pre_model')
+output_dir = os.path.join(model_dir, './')
 vocab_file = os.path.join(model_dir, 'vocab.txt')
 data_dir = os.path.join(model_dir, '../data/LCQMC/processed')
 
