@@ -18,11 +18,11 @@ def run():
     text = ["我在这里"]
     for i in range(10):
         s = time.time()
-        for i in range(5):
+        for i in range(1):
             response = stub.get_vectors(bert_server_pb2.Texts(sentences=text))
             vectors = np.array([list(v.vector) for v in response.vectors])
         e = time.time()
-        print(f"time{len(vectors)}: {int((e-s)/5*1000)} \n ")
+        print(f"time{len(vectors)}: {int((e-s)/1*1000)} \n ")
         text *= 2
     # response = stub.get_vector(bert_server_pb2.Text(sentence="我在这里"))
     # print(response.vector)

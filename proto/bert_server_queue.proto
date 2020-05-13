@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+service BertServet{
+    rpc get_vectors(stream Texts) returns (stream ReplyVectors) {}
+    rpc get_vector(Text) returns (Vector) {}
+}
+
+message Texts{
+    string token = 1;
+    repeated string sentences = 2;
+}
+
+message Text{
+    string sentence = 1;
+}
+
+message Vectors{
+    string token = 1;
+    repeated Vector vectors  = 2;
+}
+
+message Vector{
+    repeated double vector  = 2;
+}
+
+message ReplyVectors{
+    repeated Vectors reply = 1;
+}

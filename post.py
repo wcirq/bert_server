@@ -8,8 +8,8 @@ from flask import json
 
 
 def get_vectors(texts):
-    # url = "http://127.0.0.1:50051/get_vectors"
-    url = "http://172.16.204.14:50051/get_vectors"
+    # url = "http://127.0.0.1:50052/get_vectors"
+    url = "http://172.16.204.14:50052/get_vectors"
     param = {
         "sentences": texts,
     }
