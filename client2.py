@@ -46,17 +46,17 @@ def single_predict(n=1000):
     channel = grpc.insecure_channel('172.16.204.14:50051')
     # 调用 rpc 服务
     stub = bert_server_pb2_grpc.BertServetStub(channel)
-    text = ["我在这里"]
+    text = ["我在这里"]*600
     s = time.time()
-    for i in tqdm(range(n), mininterval=10):
+    for i in tqdm(range(n)):
         predict(stub, text)
     e = time.time()
     print(f"single predict {n} time: {e - s}")
 
 
 def run():
-    batch_predict(n=2000)
-    # single_predict(n=100)
+    # batch_predict(n=2000)
+    single_predict(n=1)
 
 
 if __name__ == '__main__':
