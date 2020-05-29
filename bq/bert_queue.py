@@ -62,9 +62,20 @@ class BertQueue(object):
                 interval = end - start
                 if len(inputs) > 64 or (interval > 0.1 and len(inputs) > 0):
                     logger.info(f"batch size: {len(inputs)}, time: {interval}")
+                    if len(inputs) > 512:
+                        vectors = []
+                        n = int(len(inputs) // 64) + 1
+                        for i in range(n):
+                            sentences = inputs[i * 64:(i + 1) * 64]
+                            if len(sentences) == 0:
+                                continue
+                            vector = self.text2vec.encode(sentences)
+                            vectors.append(vector)
+                        vectors = np.concatenate(vectors, axis=0)
+                    else:
+                        vectors = self.text2vec.encode(inputs)
                     info = pd.DataFrame(np.array([tokens, inputs]).T, columns=["tokens", "inputs"]).groupby(
                         "tokens").indices
-                    vectors = self.text2vec.encode(inputs)
                     reply_vectors = {k: [vectors[i] for i in v] for k, v in info.items()}
                     self.output_queue.update(reply_vectors)
                     inputs = []

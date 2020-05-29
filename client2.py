@@ -41,12 +41,18 @@ def batch_predict(n=1000):
 
 
 def single_predict(n=1000):
+    MAX_MESSAGE_LENGTH = 12595200  # batch 大概为2048
+    options = [
+        ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
+        ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH),
+    ]
     # 连接 rpc 服务器
     # channel = grpc.insecure_channel('localhost:50051')
-    channel = grpc.insecure_channel('172.16.204.14:50051')
+    # channel = grpc.insecure_channel('172.16.204.14:50051')
+    channel = grpc.insecure_channel('172.16.204.14:50051', options=options)
     # 调用 rpc 服务
     stub = bert_server_pb2_grpc.BertServetStub(channel)
-    text = ["我在这里"]*600
+    text = ["我在这里"]*2048
     s = time.time()
     for i in tqdm(range(n)):
         predict(stub, text)

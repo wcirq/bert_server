@@ -163,7 +163,7 @@ class BertEncode(object):
 if __name__ == '__main__':
     text2vec = BertEncode(graph_path=None)
     while 1:
-        text = ["我在这里"]
+        text = ["我在这里"]*100
         res1 = text2vec.encode(text)
         for i in range(10):
             s = time.time()
